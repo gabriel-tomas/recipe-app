@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { FaRegClock, FaUserFriends, FaStar } from 'react-icons/fa';
 import { ContainerRecipes } from './styled';
 
@@ -15,7 +16,11 @@ export default function Recipes({ items }) {
       {items.length > 0
         ? items.map((item) => {
             return (
-              <div className="recipe-item" key={item.id}>
+              <Link
+                className="recipe-item"
+                key={item.id}
+                to={`recipe/${item.id}`}
+              >
                 <div className="container-img">
                   <img src={item.image} alt={item.name} />
                 </div>
@@ -46,7 +51,7 @@ export default function Recipes({ items }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })
         : null}
