@@ -100,7 +100,7 @@ export const ContainerRecipe = styled.div`
 `;
 
 export const ContainerIngredients = styled.div`
-  margin-top: 2rem;
+  margin-top: 4rem;
 
   .container-title {
     text-align: center;
@@ -132,7 +132,7 @@ export const ContainerIngredients = styled.div`
 `;
 
 export const ContainerInstructions = styled.div`
-  margin-top: 2rem;
+  margin-top: 4rem;
 
   .container-title {
     text-align: center;

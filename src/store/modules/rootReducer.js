@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import exampleReducer from './example/reducer';
+import navPage from './navPage/reducer';
 
 export default combineReducers({
-  exampleReducer,
+  navPage,
 });
