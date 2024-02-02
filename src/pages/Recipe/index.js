@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaRegClock, FaUserFriends, FaStar } from 'react-icons/fa';
 import { FaBowlFood } from 'react-icons/fa6';
-import { useDispatch } from 'react-redux';
-/* import { toast } from 'react-toastify'; */
 
-import * as actions from '../../store/modules/navPage/actions';
 import axios from '../../services/axios';
 import Loading from '../../components/Loading';
 import {
@@ -23,10 +20,8 @@ export default function Recipe() {
     medium: 'Moderado',
     hard: 'Dificíl',
   };
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(actions.navPagePath(''));
     async function getRecipe() {
       const response = await axios.get(`/recipes/${id}`);
       if (response.status !== 200) {

@@ -8,7 +8,7 @@ export default {
 
   neutral1: '#52525233',
   neutral2: '#5252525e',
-  neutral3: 'rgb(33 33 33)',
+  neutral3: 'rgb(238 238 238)',
 
   messages: {
     success: '#577d3d',

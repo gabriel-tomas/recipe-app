@@ -23,6 +23,7 @@ export default createGlobalStyle`
 
     --neutral1: ${colors.neutral1};
     --neutral2: ${colors.neutral2};
+    --neutral3: ${colors.neutral3};
 
     --font-size-sm: ${fonts.fontSizeSm};
     --font-size-base: ${fonts.fontSizeBase};
@@ -57,7 +58,7 @@ export default createGlobalStyle`
   }
 
   button {
-    background-color: ${colors.primary};
+    background-color: unset;
     height: 35px;
     padding-inline: 19px;
     font-weight: 700;
