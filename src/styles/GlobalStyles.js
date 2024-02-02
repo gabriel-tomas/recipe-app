@@ -44,6 +44,12 @@ export default createGlobalStyle`
     min-height: 100vh;
   }
 
+  body.disabled {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
   body > #root {
     display: flex;
     flex-direction: column;

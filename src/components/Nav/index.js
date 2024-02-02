@@ -10,16 +10,26 @@ import { Wrapper, Navigator } from './styled';
 export default function Nav() {
   const actualPath = useSelector((state) => state.navPage.navPage);
 
+  const handleClick = () => {
+    const input = document.querySelector('.input-search');
+    input.classList.toggle('active');
+    input.focus();
+    document.body.classList.toggle('disabled');
+    const nav = document.querySelector('.container-nav');
+    nav.classList.toggle('search-active');
+  };
+
   return (
-    <Wrapper>
+    <Wrapper className="container-nav">
       <Navigator>
         <IconContext.Provider value={{ color: colors.neutral3 }}>
-          <Link
-            to="/search"
-            className={`container-nav-icon ${actualPath === '/search' ? 'actived' : ''}`}
+          <button
+            onClick={handleClick}
+            className={`container-nav-icon button-search ${actualPath === '/search' ? 'actived' : ''}`}
           >
             <FiSearch />
-          </Link>
+          </button>
+          <input className="input-search" type="text" name="" />
           <Link
             to="/"
             className={`container-nav-icon ${actualPath === '/' ? 'actived' : ''}`}

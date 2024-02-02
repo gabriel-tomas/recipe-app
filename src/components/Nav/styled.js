@@ -5,6 +5,47 @@ export const Wrapper = styled.div`
   bottom: 10svh;
   left: 50%;
   transform: translateX(-50%);
+  transition: .3s all cubic-bezier(0.23, 1, 0.320, 1);
+
+  &.search-active {
+    bottom: 10svh;
+    width: min(600px, 80%);
+  }
+
+  .container-nav-icon.button-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .input-search {
+    display: none;
+    flex-grow: 1;
+    margin-inline: .5rem;
+    padding-inline: .8rem;
+    height: 33px;
+    border-radius: 100px;
+  }
+
+  .input-search.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 563px) {
+    &.search-active {
+      width: 95%;
+    }
+
+    .input-search {
+      width: 130px;
+    }
+  }
+
+  @media screen and (max-width: 357px) {
+    .input-search {
+      width: 100px;
+    }
+  }
 `;
 
 export const Navigator = styled.nav`
@@ -19,6 +60,11 @@ export const Navigator = styled.nav`
     background-color: var(--accent);
     box-shadow: 0 0 10px var(--neutral2);
     transition: all .5s;
+  }
+
+  .container-nav.search-active & {
+    display: flex;
+    justify-content: space-between;
   }
 
   .container-nav-icon {
@@ -36,5 +82,9 @@ export const Navigator = styled.nav`
       width: 100%;
       height: 100%;
     }
+  }
+
+  button.container-nav-icon {
+    background-color: unset;
   }
 `;
