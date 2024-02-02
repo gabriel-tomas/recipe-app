@@ -4,7 +4,8 @@ export const ContainerRecipes = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  column-gap: 1rem;
+  row-gap: 2rem;
   margin-top: 2rem;
   margin-bottom: 4rem;
   font-size: var(--font-size-base);

@@ -58,6 +58,7 @@ export const ContainerRecipe = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: var(--font-size-sm);
+    margin-top: 1.5rem;
   }
 
   .container-difficulty-rating, .container-cuisine {
