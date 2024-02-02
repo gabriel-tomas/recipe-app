@@ -9,6 +9,10 @@ export const ContainerRecipes = styled.div`
   margin-bottom: 4rem;
   font-size: var(--font-size-base);
 
+  a.recipe-item:hover {
+    text-decoration: none;
+  }
+
   .recipe-item {
     background-color: var(--backgroundCard);
     border-radius: 10px;
