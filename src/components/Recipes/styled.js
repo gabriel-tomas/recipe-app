@@ -25,6 +25,7 @@ export const ContainerRecipes = styled.div`
     object-fit: cover;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    animation: show .3s;
   }
 
   .container-img > .container-svg {

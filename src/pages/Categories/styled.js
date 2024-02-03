@@ -13,11 +13,13 @@ export const ContainerItems = styled.div`
   margin-bottom: 4rem;
 
   .container-category {
-    background-color: var(--secondary);
+    background-color: var(--neutral1);
     border-radius: 10px;
     animation: show.3s;
     display: grid;
     place-items: center;
+    animation: show .3s;
+    height: calc(100% - 3px);
 
     .container-img {
       z-index: 1;
@@ -27,6 +29,13 @@ export const ContainerItems = styled.div`
       transition: all .2s;
     }
 
+    .container-img > .container-svg {
+      width: 100%;
+      height: 260px;
+      display: grid;
+      place-items: center;
+    }
+
     &:hover .container-img {
       filter: brightness(80%);
     }
@@ -34,14 +43,24 @@ export const ContainerItems = styled.div`
     .container-img > img {
       border-radius: 10px;
       width: 100%;
-      height: 100%;
+      height: clamp(12.5rem, 10.096rem + 15.385vw, 18.75rem);
       object-fit: cover;
+      animation: show .3s;
     }
 
     h2 {
       z-index: 1;
       position: absolute;
       color: var(--white);
+    }
+
+    @keyframes show {
+      0%{
+        opacity: 0;
+      }
+      100%{
+        opacity: 1;
+      }
     }
   }
 
@@ -53,6 +72,10 @@ export const ContainerItems = styled.div`
     grid-template-columns: auto;
     & {
       margin-inline: 2rem;
+    }
+    .container-img > img {
+      width: 100%;
+      height: 100%;
     }
   }
 
