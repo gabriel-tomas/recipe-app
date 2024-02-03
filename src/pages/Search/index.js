@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import axios from '../../services/axios';
+import { toast } from 'react-toastify';
 
 import Recipes from '../../components/Recipes';
 import Loading from '../../components/Loading';
@@ -14,21 +15,35 @@ export default function Search() {
   React.useEffect(() => {
     setRecipes([]);
     async function getRecipes() {
-      const response = await axios.get(`/recipes/search?q=${item}`);
-      if (response.status !== 200) {
-        setRecipes(false);
-        return;
+      try {
+        const response = await axios.get(`/recipes/search?q=${item}`);
+        if (response.status !== 200) {
+          setRecipes(false);
+          return;
+        }
+        if (response.data.recipes.length === 0) {
+          setRecipes(false);
+          return;
+        }
+        setRecipes(response.data.recipes);
+      } catch (e) {
+        setRecipes('error');
+        if (e.code === 'ERR_NETWORK') {
+          toast.error('Conecte-se a internet');
+          return;
+        }
+        toast.error('Erro desconhecido');
       }
-      if (response.data.recipes.length === 0) {
-        setRecipes(false);
-        return;
-      }
-      setRecipes(response.data.recipes);
     }
     getRecipes();
   }, [item]);
 
-  return !recipes ? (
+  return recipes === 'error' ? (
+    <NotFound
+      message={'Ocorreu um problema ao tentar realizar a pesquisa'}
+      paragraph
+    />
+  ) : !recipes ? (
     <NotFound message={`Nenhuma receita com "${item}" foi encontrada`} />
   ) : recipes.length > 0 ? (
     <>

@@ -46,7 +46,7 @@ export const ContainerRecipes = styled.div`
     display: flex;
     flex-direction: column;
     gap: .2rem;
-    margin-top: .5rem;
+    margin-top: .6rem;
   }
 
   .container-meal-info > span {
@@ -56,7 +56,7 @@ export const ContainerRecipes = styled.div`
   }
 
   .container-difficulty-rating {
-    margin-top: .5rem;
+    margin-top: .6rem;
     font-size: var(--font-size-sm);
     display: flex;
     justify-content: space-between;

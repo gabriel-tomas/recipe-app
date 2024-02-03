@@ -92,22 +92,6 @@ export default createGlobalStyle`
   body .Toastify div.Toastify__toast-body > div:nth-child(2) {
     color: ${colors.text};
   }
-
-  body .Toastify .Toastify__toast-container .Toastify__toast--success {
-    background-color: ${colors.messages.success};
-  }
-
-  body .Toastify .Toastify__toast-container .Toastify__toast--error {
-    background-color: ${colors.messages.error};
-  }
-
-  body .Toastify .Toastify__toast-container .Toastify__toast--warning {
-    background-color: ${colors.messages.warn};
-  }
-
-  body .Toastify .Toastify__toast-container .Toastify__toast--info {
-    background-color: ${colors.messages.info};
-  }
 `;
 
 export const Main = styled.main`

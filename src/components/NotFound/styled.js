@@ -16,6 +16,12 @@ export const ContainerNotFound = styled.div`
     font-weight: 500;
   }
 
+  .message-paragraph {
+    margin-bottom: 3rem;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+  }
+
   .container-img {
     display: flex;
     justify-content: center;

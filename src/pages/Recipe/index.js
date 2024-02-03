@@ -4,7 +4,10 @@ import { FaRegClock, FaUserFriends, FaStar } from 'react-icons/fa';
 import { FaBowlFood } from 'react-icons/fa6';
 
 import axios from '../../services/axios';
+import { toast } from 'react-toastify';
+
 import Loading from '../../components/Loading';
+import NotFound from '../../components/NotFound';
 import {
   ContainerWrapper,
   ContainerRecipe,
@@ -23,19 +26,33 @@ export default function Recipe() {
 
   React.useEffect(() => {
     async function getRecipe() {
-      const response = await axios.get(`/recipes/${id}`);
-      if (response.status !== 200) {
-        setRecipe({});
-        return;
+      try {
+        const response = await axios.get(`/recipes/${id}`);
+        if (response.status !== 200) {
+          setRecipe({});
+          return;
+        }
+        setRecipe(response.data);
+      } catch (e) {
+        setRecipe('error');
+        if (e.code === 'ERR_NETWORK') {
+          toast.error('Conecte-se a internet');
+          return;
+        }
+        toast.error('Erro desconhecido');
       }
-      setRecipe(response.data);
     }
     getRecipe();
   }, []);
 
   return (
     <>
-      {recipe ? (
+      {recipe === 'error' ? (
+        <NotFound
+          message={'Ocorreu um problema ao tentar acessar a receita'}
+          paragraph
+        />
+      ) : recipe ? (
         <ContainerWrapper>
           <ContainerRecipe>
             <div className="container-img">
