@@ -89,7 +89,7 @@ export default function Recipe() {
                   <span>Tipo da refeição</span>
                   <span>
                     {recipe.mealType.map((value) => {
-                      return value;
+                      return <em key={value}>{value} </em>;
                     })}
                   </span>
                 </div>

@@ -20,6 +20,7 @@ export default createGlobalStyle`
     --primary: ${colors.primary};
     --secondary: ${colors.secondary};
     --accent: ${colors.accent};
+    --white: ${colors.white};
 
     --neutral1: ${colors.neutral1};
     --neutral2: ${colors.neutral2};

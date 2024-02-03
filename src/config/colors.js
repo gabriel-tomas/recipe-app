@@ -5,6 +5,7 @@ export default {
   primary: '#4a54c2',
   secondary: '#cada91',
   accent: '#6ece92',
+  white: '#fff',
 
   neutral1: '#52525233',
   neutral2: '#5252525e',
