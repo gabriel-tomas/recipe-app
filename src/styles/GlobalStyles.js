@@ -83,6 +83,12 @@ export default createGlobalStyle`
     list-style: none;
   }
 
+  .container-results-search {
+    margin-inline: 1rem;
+    margin-top: 1.5rem;
+    font-size: var(--font-size-base);
+  }
+
   body .Toastify div.Toastify__toast-body > div:nth-child(2) {
     color: ${colors.text};
   }

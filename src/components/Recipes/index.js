@@ -43,7 +43,7 @@ export default function Recipes({ items }) {
               <Link
                 className="recipe-item"
                 key={item.id}
-                to={`recipe/${item.id}`}
+                to={`/recipe/${item.id}`}
               >
                 <div className="container-img">
                   {recipeImage ? (

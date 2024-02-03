@@ -31,7 +31,14 @@ export default function Search() {
   return !recipes ? (
     <NotFound message={`Nenhuma receita com "${item}" foi encontrada`} />
   ) : recipes.length > 0 ? (
-    <Recipes items={recipes} />
+    <>
+      <div className="container-results-search">
+        <p>
+          Resultados para <strong>&quot;{item}&quot;</strong>
+        </p>
+      </div>
+      <Recipes items={recipes} />
+    </>
   ) : (
     <Loading />
   );

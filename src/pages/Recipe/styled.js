@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ContainerWrapper = styled.div`
   margin-bottom: 7.3rem;
   font-size: var(--font-size-base);
+  margin-inline: 1rem;
 `;
 
 export const ContainerRecipe = styled.div`

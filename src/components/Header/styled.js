@@ -14,6 +14,10 @@ export default styled.header`
   h1 {
     font-size: ${fonts.fontSizeMd};
   }
+
+  @media screen and (max-width: 464px) {
+    gap: unset;
+  }
 `;
 
 export const ContainerSearch = styled.div`
@@ -71,11 +75,12 @@ export const ContainerMenu = styled.div`
     gap: 1.2rem;
     position: absolute;
     right: -2rem;
-    bottom: -7.2rem;
+    bottom: -7rem;
     padding: 1.2rem 2rem;
     background-color: var(--neutral3);
     border-bottom-left-radius: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    animation: opacity .15s cubic-bezier(0.6, 0.04, 0.98, 0.335);
 
     a {
       display: flex;
@@ -91,6 +96,11 @@ export const ContainerMenu = styled.div`
 
   .container-menu.on {
     display: flex;
+  }
+
+  @keyframes opacity {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
   }
 
   @media screen and (min-width: 768px) {
