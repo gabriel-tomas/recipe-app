@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GoSearch, GoHome } from 'react-icons/go';
 import { IoIosMenu } from 'react-icons/io';
 import { CiGrid41 } from 'react-icons/ci';
+import history from '../../services/history';
 
 import Wrapper, {
   ContainerSearch,
@@ -11,10 +12,20 @@ import Wrapper, {
 } from './styled';
 
 export default function Header() {
+  const [searchItem, setSearchItem] = useState('');
+  const [canSearch, setcanSearch] = useState(false);
+
   const handleSearch = () => {
     const inputSearch = document.querySelector('.input-search');
 
     inputSearch.classList.toggle('on');
+    if (canSearch) {
+      history.location.pathname.replace('/search/', '');
+      history.push(`/search/${searchItem}`);
+      setcanSearch(false);
+      setSearchItem('');
+      return;
+    }
   };
 
   const handleMenu = () => {
@@ -28,13 +39,25 @@ export default function Header() {
       );
   };
 
+  const handleSearchChange = (e) => {
+    setSearchItem(e.target.value);
+    if (!e.target.value) return;
+    setcanSearch(true);
+  };
+
   return (
     <Wrapper>
       <ContainerSearch>
         <button onClick={handleSearch} className="button-search">
           <GoSearch />
         </button>
-        <input className="input-search" type="text" placeholder="Pesquisar" />
+        <input
+          className="input-search"
+          type="text"
+          placeholder="Pesquisar"
+          onChange={handleSearchChange}
+          value={searchItem}
+        />
       </ContainerSearch>
       <ContainerMenu>
         <button onClick={handleMenu} className="button-menu">
