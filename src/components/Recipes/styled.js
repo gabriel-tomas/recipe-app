@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const ContainerRecipes = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
   column-gap: 1rem;
   row-gap: 2rem;
   margin-top: 2rem;
@@ -22,8 +21,17 @@ export const ContainerRecipes = styled.div`
 
   .container-img > img {
     width: 100%;
+    height: clamp(12.5rem, 10.096rem + 15.385vw, 18.75rem);
+    object-fit: cover;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+  }
+
+  .container-img > .container-svg {
+    width: 100%;
+    height: clamp(12.5rem, 10.096rem + 15.385vw, 18.75rem);
+    display: grid;
+    place-items: center;
   }
 
   .container-bottom {
@@ -68,7 +76,24 @@ export const ContainerRecipes = styled.div`
     }
   }
 
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+  }
+
+  @media screen and (max-width: 694px) {
+    grid-template-columns: auto;
+    & {
+      margin-inline: 2rem;
+    }
+  }
+
   @media screen and (max-width: 573px) {
     margin-inline: 1rem;
+  }
+
+  @media screen and (max-width: 331px) {
+    & {
+      margin-inline: 1rem;
+    }
   }
 `;
