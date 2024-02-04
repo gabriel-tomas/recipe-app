@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { FaRegClock, FaUserFriends, FaStar } from 'react-icons/fa';
 import { FaBowlFood } from 'react-icons/fa6';
 
-import axios from '../../services/axios';
+import axios, { translator } from '../../services/axios';
 import { toast } from 'react-toastify';
 
 import Loading from '../../components/Loading';
@@ -32,7 +32,9 @@ export default function Recipe() {
           setRecipe({});
           return;
         }
-        setRecipe(response.data);
+        const itemsTranslated = await translator(response.data, 'recipe');
+        console.log(itemsTranslated, response.data);
+        setRecipe(itemsTranslated);
       } catch (e) {
         setRecipe('error');
         if (e.code === 'ERR_NETWORK') {
@@ -43,7 +45,7 @@ export default function Recipe() {
       }
     }
     getRecipe();
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -88,9 +90,11 @@ export default function Recipe() {
                 <div className="container-meal-type">
                   <span>Tipo da refeição</span>
                   <span>
-                    {recipe.mealType.map((value) => {
-                      return <em key={value}>{value} </em>;
-                    })}
+                    {recipe.mealType
+                      ? recipe.mealType.map((value) => {
+                          return <em key={value}>{value} </em>;
+                        })
+                      : null}
                   </span>
                 </div>
                 <div className="container-cuisine">
@@ -110,13 +114,17 @@ export default function Recipe() {
                 <div className="container-tags">
                   <span>Tags: </span>
                   <div className="container-tags-items">
-                    {recipe.tags.map((tag) => {
-                      return (
-                        <span className="tag-item" key={tag}>
-                          {tag}
-                        </span>
-                      );
-                    })}
+                    {recipe.tags ? (
+                      recipe.tags.map((tag) => {
+                        return (
+                          <span className="tag-item" key={tag}>
+                            {tag}
+                          </span>
+                        );
+                      })
+                    ) : (
+                      <span className="tag-item">Nenhum</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -128,13 +136,15 @@ export default function Recipe() {
             </div>
             <div className="ingredients">
               <ul>
-                {recipe.ingredients.map((ingredient) => {
-                  return (
-                    <li className="ingredient-item" key={ingredient}>
-                      {ingredient}
-                    </li>
-                  );
-                })}
+                {recipe.ingredients
+                  ? recipe.ingredients.map((ingredient) => {
+                      return (
+                        <li className="ingredient-item" key={ingredient}>
+                          {ingredient}
+                        </li>
+                      );
+                    })
+                  : null}
               </ul>
             </div>
           </ContainerIngredients>
@@ -144,13 +154,15 @@ export default function Recipe() {
             </div>
             <div className="instructions">
               <ol>
-                {recipe.instructions.map((instruction) => {
-                  return (
-                    <li className="instruction-item" key={instruction}>
-                      <span>{instruction}</span>
-                    </li>
-                  );
-                })}
+                {recipe.instructions
+                  ? recipe.instructions.map((instruction) => {
+                      return (
+                        <li className="instruction-item" key={instruction}>
+                          <span>{instruction}</span>
+                        </li>
+                      );
+                    })
+                  : null}
               </ol>
             </div>
           </ContainerInstructions>

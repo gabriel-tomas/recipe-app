@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import axios from '../../services/axios';
+import axios, { translator } from '../../services/axios';
 import { toast } from 'react-toastify';
 
 import Recipes from '../../components/Recipes';
@@ -21,7 +21,9 @@ export default function Home() {
           setRecipes(false);
           return;
         }
-        setRecipes(sortRecipes(response.data.recipes, 3));
+        const recipesSorted = sortRecipes(response.data.recipes, 3);
+        const itemsTranslated = await translator(recipesSorted, 'recipe');
+        setRecipes(itemsTranslated);
       } catch (e) {
         setRecipes(false);
         if (e.code === 'ERR_NETWORK') {
