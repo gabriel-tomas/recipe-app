@@ -40,7 +40,9 @@ export const recipesTranslation = async (
       `https://api.datpmt.com/api/v1/dictionary/translate?string=${itemsJSON}&from_lang=${fromLang}&to_lang=${toLang}`,
     );
 
-    const data = await request.data;
+    let data = await request.data;
+
+    data = data.replace('"]"cui"', '"],"cui"');
     const dataTranslated = JSON.parse(`[${data}]`);
 
     if (items instanceof Array) {
