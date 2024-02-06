@@ -44,6 +44,15 @@ export const recipesTranslation = async (
 
     data = data.replace('"]"cui"', '"],"cui"');
     const dataTranslated = JSON.parse(`[${data}]`);
+    dataTranslated.forEach((item, index) => {
+      Object.keys(item).forEach((objectKey) => {
+        if (objectKey[0] === ' ' || objectKey[objectKey.length - 1] === ' ') {
+          dataTranslated[index][objectKey.trim()] = item[objectKey];
+          delete dataTranslated[index][objectKey];
+        }
+      });
+    });
+    console.log(dataTranslated);
 
     if (items instanceof Array) {
       dataTranslated.forEach((item) => {
