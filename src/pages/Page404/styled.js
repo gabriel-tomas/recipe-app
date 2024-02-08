@@ -7,6 +7,7 @@ export const Container404 = styled.div`
   transform: translate(-50%, -50%);
   font-size: var(--font-size-base);
   text-align: center;
+  animation: .2s opacity;
 
   p {
     margin-top: 1.2rem;
@@ -22,6 +23,22 @@ export const Container404 = styled.div`
 
     img {
       width: 100%;
+    }
+  }
+
+  @keyframes opacity {
+    from {
+      opacity: 0;
+    } to {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-height: 570px) {
+    & {
+      position: static;
+      transform: unset;
+      margin-block: 2rem;
     }
   }
 `;

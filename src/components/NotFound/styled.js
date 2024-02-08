@@ -8,6 +8,7 @@ export const ContainerNotFound = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
+  animation: .2s opacity;
 
   h1 {
     text-align: center;
@@ -30,6 +31,23 @@ export const ContainerNotFound = styled.div`
 
     img {
       width: 100%;
+    }
+  }
+
+  @keyframes opacity {
+    from {
+      opacity: 0;
+    } to {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-height: 570px) {
+    & {
+      position: static;
+      transform: unset;
+      margin-block: 2rem;
+      margin-inline: auto;
     }
   }
 `;
