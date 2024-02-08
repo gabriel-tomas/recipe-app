@@ -63,7 +63,11 @@ export default function Header() {
 
   const handleSearchChange = (e) => {
     setSearchItem(e.target.value);
-    if (!e.target.value) return;
+    if (!e.target.value) {
+      setcanSearch(false);
+      setCanOpenInput(true);
+      return;
+    }
     setcanSearch(true);
     setCanOpenInput(false);
   };
