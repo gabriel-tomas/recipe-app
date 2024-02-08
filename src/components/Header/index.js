@@ -15,28 +15,38 @@ import Wrapper, {
 export default function Header() {
   const [searchItem, setSearchItem] = useState('');
   const [canSearch, setcanSearch] = useState(false);
+  const [canOpenInput, setCanOpenInput] = useState(true);
 
-  const handleSearch = async () => {
+  const handleSearch = async (e, btnClick) => {
     const inputSearch = document.querySelector('.input-search');
 
-    inputSearch.classList.toggle('on');
+    let keyUpPress;
+    if (e) keyUpPress = e.keyCode === 13;
+
+    if (!e && canOpenInput) inputSearch.classList.toggle('on');
+    setTimeout(() => inputSearch.focus(), 100);
+
     if (canSearch) {
-      history.location.pathname.replace('/search/', '');
-      if (searchItem.length > 500) {
-        var searchFinalItem = searchItem.slice(0, 500);
-      } else {
-        searchFinalItem = searchItem;
+      if (btnClick || keyUpPress) {
+        setcanSearch(false);
+        history.location.pathname.replace('/search/', '');
+        if (searchItem.length > 500) {
+          var searchFinalItem = searchItem.slice(0, 500);
+        } else {
+          searchFinalItem = searchItem;
+        }
+        let searchItemTranslated = await translator(
+          searchFinalItem,
+          'phrase',
+          'pt',
+          'en',
+        );
+        inputSearch.classList.remove('on');
+        history.push(`/search/${searchItemTranslated}`);
+        setSearchItem('');
+        setCanOpenInput(true);
+        return;
       }
-      let searchItemTranslated = await translator(
-        searchFinalItem,
-        'phrase',
-        'pt',
-        'en',
-      );
-      history.push(`/search/${searchItemTranslated}`);
-      setcanSearch(false);
-      setSearchItem('');
-      return;
     }
   };
 
@@ -55,12 +65,16 @@ export default function Header() {
     setSearchItem(e.target.value);
     if (!e.target.value) return;
     setcanSearch(true);
+    setCanOpenInput(false);
   };
 
   return (
     <Wrapper>
       <ContainerSearch>
-        <button onClick={handleSearch} className="button-search">
+        <button
+          onClick={() => handleSearch(null, true)}
+          className="button-search"
+        >
           <GoSearch />
         </button>
         <input
@@ -68,6 +82,7 @@ export default function Header() {
           type="text"
           placeholder="Pesquisar"
           onChange={handleSearchChange}
+          onKeyUp={(e) => handleSearch(e, false)}
           value={searchItem}
         />
       </ContainerSearch>
