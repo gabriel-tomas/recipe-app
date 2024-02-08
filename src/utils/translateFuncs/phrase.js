@@ -12,8 +12,6 @@ export const phraseTranslation = async (
     );
     const stringTranslated = await request.data;
 
-    console.log(stringTranslated);
-
     return stringTranslated;
   } catch (e) {
     toast.info('Erro ao tentar traduzir para português');
