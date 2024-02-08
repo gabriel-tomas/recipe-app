@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { GoSearch, GoHome } from 'react-icons/go';
 import { IoIosMenu } from 'react-icons/io';
 import { CiGrid41 } from 'react-icons/ci';
-import { translator } from '../../services/axios';
 import history from '../../services/history';
 
 import Wrapper, {
@@ -35,14 +34,8 @@ export default function Header() {
         } else {
           searchFinalItem = searchItem;
         }
-        let searchItemTranslated = await translator(
-          searchFinalItem,
-          'phrase',
-          'pt',
-          'en',
-        );
         inputSearch.classList.remove('on');
-        history.push(`/search/${searchItemTranslated}`);
+        history.push(`/search/${searchFinalItem}`);
         setSearchItem('');
         setCanOpenInput(true);
         return;

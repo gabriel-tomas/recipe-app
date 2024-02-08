@@ -16,7 +16,15 @@ export default function Search() {
     setRecipes([]);
     async function getRecipes() {
       try {
-        const response = await axios.get(`/recipes/search?q=${item}`);
+        const searchItemTranslated = await translator(
+          item,
+          'phrase',
+          'pt',
+          'en',
+        );
+        const response = await axios.get(
+          `/recipes/search?q=${searchItemTranslated}`,
+        );
         if (response.status !== 200) {
           setRecipes(false);
           return;
