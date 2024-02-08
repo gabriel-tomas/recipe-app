@@ -15,6 +15,8 @@ export const ContainerNotFound = styled.div`
     margin-bottom: 4rem;
     font-size: var(--font-size-lg);
     font-weight: 500;
+    overflow: auto;
+    max-width: 100%;
   }
 
   .message-paragraph {

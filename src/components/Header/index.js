@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { GoSearch, GoHome } from 'react-icons/go';
 import { IoIosMenu } from 'react-icons/io';
 import { CiGrid41 } from 'react-icons/ci';
+import { translator } from '../../services/axios';
 import history from '../../services/history';
 
 import Wrapper, {
@@ -15,13 +16,24 @@ export default function Header() {
   const [searchItem, setSearchItem] = useState('');
   const [canSearch, setcanSearch] = useState(false);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     const inputSearch = document.querySelector('.input-search');
 
     inputSearch.classList.toggle('on');
     if (canSearch) {
       history.location.pathname.replace('/search/', '');
-      history.push(`/search/${searchItem}`);
+      if (searchItem.length > 500) {
+        var searchFinalItem = searchItem.slice(0, 500);
+      } else {
+        searchFinalItem = searchItem;
+      }
+      let searchItemTranslated = await translator(
+        searchFinalItem,
+        'phrase',
+        'pt',
+        'en',
+      );
+      history.push(`/search/${searchItemTranslated}`);
       setcanSearch(false);
       setSearchItem('');
       return;
