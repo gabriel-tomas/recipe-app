@@ -4,6 +4,13 @@ import { Container404 } from './styled';
 import notFound404 from '../../assets/imgs/notFound404.svg';
 
 export default function Page404() {
+  const preloadImage = (url) => {
+    const img = new Image();
+    img.src = url;
+  };
+
+  preloadImage(notFound404);
+
   return (
     <Container404>
       <h1>Erro 404</h1>
