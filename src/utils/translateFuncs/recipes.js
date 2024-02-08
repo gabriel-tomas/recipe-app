@@ -77,7 +77,8 @@ export const recipesTranslation = async (
       .replaceAll(',]', ']')
       .replaceAll('"]"', '"],"')
       .replaceAll('"]"', '"],"')
-      .replaceAll(', ,', ',');
+      .replaceAll(', ,', ',')
+      .replaceAll('" "', '","');
 
     const dataParsed = JSON.parse(dataTranslated);
 
