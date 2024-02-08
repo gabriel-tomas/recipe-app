@@ -57,7 +57,7 @@ export const recipesTranslation = async (
 
     let request;
     let dataTranslated = '';
-    if (itemsJSON.length > 4) {
+    if (items.length > 4) {
       for (let item of itemsJSON) {
         request = await axios(
           `https://api.datpmt.com/api/v1/dictionary/translate?string=${item}&from_lang=${fromLang}&to_lang=${toLang}`,

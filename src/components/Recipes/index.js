@@ -97,9 +97,9 @@ export default function Recipes({ items }) {
 }
 
 Recipes.defautProps = {
-  items: {},
+  items: [],
 };
 
 Recipes.propTypes = {
-  items: PropTypes.instanceOf(Object),
+  items: PropTypes.instanceOf(Array),
 };
