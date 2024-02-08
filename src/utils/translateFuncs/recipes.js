@@ -7,7 +7,7 @@ export const recipesTranslation = async (
   toLang = 'pt',
 ) => {
   try {
-    const itemsJSON = [];
+    let itemsJSON = [];
     if (items instanceof Array) {
       items.forEach((item) => {
         itemsJSON.push(
@@ -36,26 +36,62 @@ export const recipesTranslation = async (
       );
     }
 
-    const request = await axios(
-      `https://api.datpmt.com/api/v1/dictionary/translate?string=${itemsJSON}&from_lang=${fromLang}&to_lang=${toLang}`,
-    );
+    if (itemsJSON.length > 4) {
+      let newItemsJson = [];
+      let itemsToAdd = [];
+      let countToAdd = 0;
+      itemsJSON.forEach((item) => {
+        if (countToAdd === 4) {
+          newItemsJson.push(itemsToAdd);
+          itemsToAdd = [];
+          countToAdd = 0;
+        }
+        countToAdd++;
+        itemsToAdd.push(item);
+      });
+      if (newItemsJson.length !== itemsJSON.length) {
+        newItemsJson.push(itemsToAdd);
+      }
+      itemsJSON = [...newItemsJson];
+    }
 
-    let data = await request.data;
+    let request;
+    let dataTranslated = '';
+    if (itemsJSON.length > 4) {
+      for (let item of itemsJSON) {
+        request = await axios(
+          `https://api.datpmt.com/api/v1/dictionary/translate?string=${item}&from_lang=${fromLang}&to_lang=${toLang}`,
+        );
+        dataTranslated += await request.data;
+      }
+    } else {
+      request = await axios(
+        `https://api.datpmt.com/api/v1/dictionary/translate?string=${itemsJSON}&from_lang=${fromLang}&to_lang=${toLang}`,
+      );
+      dataTranslated = await request.data;
+    }
 
-    data = data.replace('"]"cui"', '"],"cui"');
-    const dataTranslated = JSON.parse(`[${data}]`);
-    dataTranslated.forEach((item, index) => {
+    dataTranslated = `[${dataTranslated}]`
+      .replaceAll('}', '},')
+      .replaceAll(',,', ',')
+      .replaceAll(',]', ']')
+      .replaceAll('"]"', '"],"')
+      .replaceAll('"]"', '"],"')
+      .replaceAll(', ,', ',');
+
+    const dataParsed = JSON.parse(dataTranslated);
+
+    dataParsed.forEach((item, index) => {
       Object.keys(item).forEach((objectKey) => {
         if (objectKey[0] === ' ' || objectKey[objectKey.length - 1] === ' ') {
-          dataTranslated[index][objectKey.trim()] = item[objectKey];
-          delete dataTranslated[index][objectKey];
+          dataParsed[index][objectKey.trim()] = item[objectKey];
+          delete dataParsed[index][objectKey];
         }
       });
     });
-    console.log(dataTranslated);
 
     if (items instanceof Array) {
-      dataTranslated.forEach((item) => {
+      dataParsed.forEach((item) => {
         items.forEach((itemChange) => {
           if (itemChange.id === item.id) {
             itemChange.name = item.n;
@@ -68,12 +104,12 @@ export const recipesTranslation = async (
         });
       });
     } else {
-      items.name = dataTranslated[0].n;
-      items.ingredients = dataTranslated[0].in;
-      items.instructions = dataTranslated[0].ins;
-      items.cuisine = dataTranslated[0].cui;
-      items.tags = dataTranslated[0].tg;
-      items.mealType = dataTranslated[0].mt;
+      items.name = dataParsed[0].n;
+      items.ingredients = dataParsed[0].in;
+      items.instructions = dataParsed[0].ins;
+      items.cuisine = dataParsed[0].cui;
+      items.tags = dataParsed[0].tg;
+      items.mealType = dataParsed[0].mt;
     }
 
     return items;

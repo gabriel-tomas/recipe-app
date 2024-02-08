@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import axios from '../../services/axios';
+import axios, { translator } from '../../services/axios';
 import { toast } from 'react-toastify';
 
 import Recipes from '../../components/Recipes';
@@ -25,7 +25,11 @@ export default function Search() {
           setRecipes(false);
           return;
         }
-        setRecipes(response.data.recipes);
+        const itemsTranslated = await translator(
+          response.data.recipes,
+          'recipe',
+        );
+        setRecipes(itemsTranslated);
       } catch (e) {
         setRecipes('error');
         if (e.code === 'ERR_NETWORK') {
