@@ -20,6 +20,7 @@ export const ContainerItems = styled.div`
     place-items: center;
     animation: show .3s;
     height: calc(100% - 3px);
+    position: relative;
 
     .container-img {
       z-index: 1;
