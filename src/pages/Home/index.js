@@ -38,10 +38,10 @@ export default function Home() {
 
   return (
     <ContainerRecipes style={{ marginTop: `2rem` }}>
-      <Title>Receitas do dia</Title>
+      <Title>Seleção de pratos</Title>
       {!recipes ? (
         <NotFound
-          message={'Ocorreu um problema ao tentar acessar as receitas do dia'}
+          message={'Ocorreu um problema ao tentar acessar "Seleção de pratos"'}
           paragraph
         />
       ) : recipes.length > 0 ? (
