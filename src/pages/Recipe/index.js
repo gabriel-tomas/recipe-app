@@ -33,7 +33,6 @@ export default function Recipe() {
           return;
         }
         const itemsTranslated = await translator(response.data, 'recipe');
-        console.log(itemsTranslated, response.data);
         setRecipe(itemsTranslated);
       } catch (e) {
         setRecipe('error');
