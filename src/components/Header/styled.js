@@ -56,8 +56,6 @@ export const ContainerSearch = styled.div`
 `;
 
 export const ContainerMenu = styled.div`
-  position: relative;
-
   .button-menu {
     display: grid;
     place-items: center;
@@ -69,18 +67,39 @@ export const ContainerMenu = styled.div`
   }
 
   .container-menu {
-    display: none;
+    visibility: hidden;
+    display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 1.2rem;
     position: absolute;
-    right: -2rem;
-    bottom: -7rem;
+    top: 0;
+    right: 0;
+    width: min(60vw, 350px);
     padding: 1.2rem 2rem;
     background-color: var(--neutral3);
     border-bottom-left-radius: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    animation: opacity .15s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    height: 100%;
+    z-index: 3;
+
+    .exit-menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: clamp(0.1rem, -0.323rem + 2.708vw, 1.2rem);
+      margin-top: 1.2rem;
+      height: unset;
+
+      &:active {
+        background-color: unset;
+      }
+
+      svg {
+        width: 1.4rem;
+        height: 1.4rem;
+      }
+    }
 
     a {
       display: flex;
@@ -95,12 +114,8 @@ export const ContainerMenu = styled.div`
   }
 
   .container-menu.on {
-    display: flex;
-  }
-
-  @keyframes opacity {
-    0% { opacity: 0 }
-    100% { opacity: 1 }
+    right: 0;
+    visibility: visible;
   }
 
   @media screen and (min-width: 768px) {

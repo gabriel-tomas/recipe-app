@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { GoSearch, GoHome } from 'react-icons/go';
+import { GoSearch, GoHome, GoX } from 'react-icons/go';
 import { IoIosMenu } from 'react-icons/io';
 import { CiGrid41 } from 'react-icons/ci';
 import history from '../../services/history';
@@ -45,13 +45,41 @@ export default function Header() {
 
   const handleMenu = () => {
     const menu = document.querySelector('.container-menu');
+    const backBlocker = document.querySelector('.back-blocker');
+    const body = document.body;
 
-    menu.classList.toggle('on');
-    document
-      .querySelectorAll('.container-menu > a')
-      .forEach((link) =>
-        link.addEventListener('click', () => menu.classList.remove('on')),
-      );
+    menu.classList.add('on');
+    backBlocker.classList.add('active-menu');
+    body.classList.add('disabled');
+
+    const backBlockerExitMenu = () => {
+      menu.classList.remove('on');
+      backBlocker.classList.remove('active-menu');
+      body.classList.remove('disabled');
+      backBlocker.removeEventListener('click', backBlockerExitMenu);
+    };
+
+    if (backBlocker.classList.contains('active-menu')) {
+      backBlocker.addEventListener('click', backBlockerExitMenu);
+    }
+
+    document.querySelectorAll('.container-menu > a').forEach((link) =>
+      link.addEventListener('click', () => {
+        menu.classList.remove('on');
+        backBlocker.classList.remove('active-menu');
+        body.classList.remove('disabled');
+      }),
+    );
+  };
+
+  const handleExitMenu = () => {
+    const menu = document.querySelector('.container-menu');
+    const backBlocker = document.querySelector('.back-blocker');
+    const body = document.body;
+
+    menu.classList.remove('on');
+    backBlocker.classList.remove('active-menu');
+    body.classList.remove('disabled');
   };
 
   const handleSearchChange = (e) => {
@@ -88,6 +116,9 @@ export default function Header() {
           <IoIosMenu />
         </button>
         <div className="container-menu">
+          <button onClick={handleExitMenu} className="exit-menu">
+            <GoX />
+          </button>
           <Link to="/">
             <span>Home</span>
             <GoHome />

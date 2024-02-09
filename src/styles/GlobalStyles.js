@@ -58,6 +58,11 @@ export default createGlobalStyle`
     min-height: 100vh;
   }
 
+  body.disable {
+    height: 100vh;
+    height: 100svh;
+  }
+
   button {
     background-color: unset;
     height: 35px;
@@ -103,5 +108,22 @@ export const Main = styled.main`
 
   @media screen and (max-width: 694px) {
     margin-inline: unset;
+  }
+`;
+
+export const BackBlocker = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -999;
+  visibility: hidden;
+  transition: .2s background-color ease-in;
+
+  &.active-menu {
+    visibility: visible;
+    z-index: 2;
+    background-color: var(--neutral1);
   }
 `;
