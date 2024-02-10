@@ -10,8 +10,8 @@ export const ContainerLoading = styled.div`
   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
   animation:s3 .5s infinite linear;
   position: absolute;
-  top: calc(50% - 25px);
-  left: calc(50% - 25px);
+  top: calc(50vh - 25px);
+  left: calc(50vw - 25px);
 
 
 
