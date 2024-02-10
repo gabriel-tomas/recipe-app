@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import axios, { translator } from '../../services/axios';
+import { translator } from '../../services/axios';
+import { defaultSearch, searchByIngredient } from '../../utils/search/index';
 import { toast } from 'react-toastify';
 
 import Recipes from '../../components/Recipes';
@@ -22,22 +23,16 @@ export default function Search() {
           'pt',
           'en',
         );
-        const response = await axios.get(
-          `/recipes/search?q=${searchItemTranslated}`,
-        );
-        if (response.status !== 200) {
-          setRecipes(false);
-          return;
+        let requestedRecipes = await defaultSearch(searchItemTranslated);
+        if (!requestedRecipes) {
+          requestedRecipes = await searchByIngredient(searchItemTranslated);
         }
-        if (response.data.recipes.length === 0) {
-          setRecipes(false);
-          return;
+        if (!requestedRecipes) {
+          var results = false;
+        } else {
+          results = await translator(requestedRecipes, 'recipe');
         }
-        const itemsTranslated = await translator(
-          response.data.recipes,
-          'recipe',
-        );
-        setRecipes(itemsTranslated);
+        setRecipes(results);
       } catch (e) {
         setRecipes('error');
         if (e.code === 'ERR_NETWORK') {

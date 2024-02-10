@@ -34,6 +34,7 @@ export default function Header() {
         } else {
           searchFinalItem = searchItem;
         }
+        searchFinalItem = searchFinalItem.trim();
         inputSearch.classList.remove('on');
         history.push(`/search/${searchFinalItem}`);
         setSearchItem('');
@@ -84,7 +85,7 @@ export default function Header() {
 
   const handleSearchChange = (e) => {
     setSearchItem(e.target.value);
-    if (!e.target.value) {
+    if (!e.target.value.trim()) {
       setcanSearch(false);
       setCanOpenInput(true);
       return;
