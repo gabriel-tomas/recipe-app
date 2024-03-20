@@ -36,7 +36,7 @@ export default function Header() {
         }
         searchFinalItem = searchFinalItem.trim();
         inputSearch.classList.remove('on');
-        history.push(`/search/${searchFinalItem}`);
+        history.push(`/search/${encodeURIComponent(searchFinalItem)}`);
         setSearchItem('');
         setCanOpenInput(true);
         return;

@@ -10,7 +10,9 @@ import Loading from '../../components/Loading';
 import NotFound from '../../components/NotFound';
 
 export default function Search() {
-  const { item } = useParams();
+  const { item: itemEncoded } = useParams();
+  const item = decodeURIComponent(itemEncoded);
+
   const [recipes, setRecipes] = useState([]);
 
   React.useEffect(() => {
