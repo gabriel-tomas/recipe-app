@@ -19,3 +19,17 @@ O principal objetivo do projeto foi praticar o React com styled components e ver
 - React
 - React router dom v5
 - Styled components
+
+## Como executar o projeto localmente
+Clone o repositório:
+```shell
+git clone https://github.com/gabriel-tomas/recipe-app.git
+```
+Instale os pacotes:
+```shell
+npm i
+```
+Execute o server:
+```shell
+npm start
+```
