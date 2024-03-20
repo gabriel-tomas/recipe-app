@@ -1,4 +1,4 @@
-# Sobre o projeto (front-end)
+# App de Receitas
 Simples projeto de um app de receitas feito com React, onde você consegue ver na home uma seleção de pratos (selecionado aleatoriamente) e consegue pesquisar por pratos.
 
 Na página da receita você consegue ver algumas informações relevantes sobre a receita, (como tempo de cozimento, quantas pessoas serve...) os ingredientes e o modo de preparo.
