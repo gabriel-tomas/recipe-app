@@ -3,7 +3,7 @@ Simples projeto de um app de receitas feito com React, onde você consegue ver n
 
 Na página da receita você consegue ver algumas informações relevantes sobre a receita, (como tempo de cozimento, quantas pessoas serve...) os ingredientes e o modo de preparo.
 
-Acesse o projeto aqui:
+Acesse o projeto aqui: https://recipe-app-jxoc.onrender.com/
 
 ![home page](https://github.com/gabriel-tomas/recipe-app/blob/master/public/imgs/recipe-app.png?raw=true)
 
